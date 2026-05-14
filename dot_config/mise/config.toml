@@ -5,5 +5,5 @@ lsd = "latest"
 
 [settings]
 trusted_config_paths = [
-  '~/workspaces/'
+  '/workspaces/'
 ]
