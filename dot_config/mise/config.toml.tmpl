@@ -1,0 +1,10 @@
+[tools]
+bat = "latest"
+chezmoi = "latest"
+lsd = "latest"
+
+{{- if eq .chezmoi.username "vscode" }}
+trusted_config_paths = [
+  '~/workspaces/'
+]
+{{- end }}
