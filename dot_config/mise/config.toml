@@ -3,9 +3,7 @@ bat = "latest"
 chezmoi = "latest"
 lsd = "latest"
 
-{{- if eq .chezmoi.username "vscode" }}
 [settings]
 trusted_config_paths = [
   '~/workspaces/'
 ]
-{{- end }}
