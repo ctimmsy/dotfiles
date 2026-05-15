@@ -25,8 +25,6 @@ alias la='lsd -lah --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 # kubectl
 alias k='kubectl'
-#source <(kubectl completion bash)
-complete -F __start_kubectl k
 # Chezmoi
 alias cz='chezmoi'
 alias cza='chezmoi add'
@@ -43,6 +41,10 @@ function man {
 {{- if eq .chezmoi.username "vscode" }}
 eval "$(mise activate bash)"
 {{- end }}
+
+# must source after mise activate to ensure binary is available
+source <(kubectl completion bash)
+complete -F __start_kubectl k
 
 # Execute oh-my-posh with given theme
 eval "$(oh-my-posh init bash --config "$HOME"/.config/omp/gruvbox-material.omp.json)"
