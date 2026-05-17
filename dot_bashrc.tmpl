@@ -44,6 +44,7 @@ eval "$(mise activate bash)"
 
 # must source after mise activate to ensure binary is available
 source <(kubectl completion bash)
+source <(fzf --bash)
 complete -F __start_kubectl k
 
 # Execute oh-my-posh with given theme
