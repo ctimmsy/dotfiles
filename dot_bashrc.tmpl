@@ -40,6 +40,7 @@ function man {
 
 {{- if eq .chezmoi.username "vscode" }}
 eval "$(mise activate bash)"
+source /etc/bash_completion
 {{- end }}
 
 # must source after mise activate to ensure binary is available
