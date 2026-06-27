@@ -11,3 +11,13 @@ end, { noremap = true, expr = true })
 vim.keymap.set({ "n", "x" }, "k", function()
   return vim.v.count > 1 and "m'" .. vim.v.count .. "k" or "k"
 end, { noremap = true, expr = true })
+
+vim.keymap.set("v", "<leader>sg", function()
+  vim.cmd('normal! "zy')
+  local query = vim.fn.getreg("z")
+  query = query:gsub(" ", "+")
+  vim.fn.jobstart({
+    "xdg-open",
+    "https://www.google.com/search?q=" .. query,
+  }, { detach = true })
+end, { desc = "Search selection in browser" })
