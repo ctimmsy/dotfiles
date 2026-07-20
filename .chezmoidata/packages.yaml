@@ -1,0 +1,22 @@
+packages:
+  darwin:
+    brews:
+    - 'git'
+    casks:
+    - 'google-chrome'
+  linux:
+    arch:
+      pacman:
+        - 'gcc'
+        - 'make'
+        - 'imagemagick'
+        - 'bat'
+        - 'lsd'
+        - 'ripgrep'
+        - 'fzf'
+        - 'fd'
+        - 'neovim'
+        - 'tree'
+        - 'lazygit'
+        - 'kubectl'
+        - 'bash-completion'

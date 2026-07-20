@@ -1,0 +1,9 @@
+{{ if eq .osid "linux-arch" -}}
+#!/bin/bash
+
+sudo pacman -S --needed - <<EOF
+{{ range .packages.linux.arch.pacman -}}
+{{ . }}
+{{ end -}}
+EOF
+{{ end -}}

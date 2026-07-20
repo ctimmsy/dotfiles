@@ -8,9 +8,9 @@
 set -o vi
 
 # Fix for rendering issues with NVIM running on TMUX inside devcontainer
-if [[ $LOGNAME == "vscode" && $TERM_PROGRAM == "TMUX" ]]; then
-  export TMUX=1
-fi
+# if [[ $LOGNAME == "vscode" && $TERM_PROGRAM == "TMUX" ]]; then
+#   export TMUX=1
+# fi
 export PATH="$PATH:$HOME/scripts:$HOME/.cargo/bin:/usr/local/bin:$HOME/.local/bin"
 # List dotfiles first when using ls
 export LC_COLLATE="C"
@@ -24,9 +24,7 @@ export TZ=Europe/London
 alias ls='lsd --color=auto --group-directories-first'
 alias la='lsd -lah --color=auto --group-directories-first'
 alias grep='grep --color=auto'
-# kubectl
 alias k='kubectl'
-# Chezmoi
 alias cz='chezmoi'
 alias cza='chezmoi add'
 
@@ -39,9 +37,15 @@ function man {
   /usr/bin/man "$1" | bat -plman
 }
 
+# Source bash-completion for debian-based (debian, ubuntu, etc) devcontainer
 {{- if eq .chezmoi.username "vscode" }}
 eval "$(mise activate bash)"
 source /etc/bash_completion
+{{- end }}
+
+# Source bash-completion for arch-based
+{{- if eq .osid "linux-arch" }}
+source /usr/share/bash-completion/bash_completion
 {{- end }}
 
 # must source after mise activate to ensure binary is available
