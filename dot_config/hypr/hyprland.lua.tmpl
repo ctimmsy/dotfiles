@@ -230,7 +230,6 @@ hl.bind(mainMod .. " + X", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exit())
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo()) -- dwindle
 hl.bind(mainMod .. " + slash", hl.dsp.layout("togglesplit")) -- dwindle
  
 -- Move focus with mainMod + arrow keys
@@ -301,10 +300,11 @@ hl.bind("XF86AudioMute",          hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO
 hl.bind("XF86AudioMicMute",       hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),    { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                   { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                   { locked = true, repeating = true })
+
+-- Change audio device using script
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("audio-switch-next"))
  
 -- Screenshot keybinds using flameshot
--- NOTE: mainMod + P is bound twice in your original config (once to `pseudo` above, once
--- to flameshot here) -- whichever bind is registered last will win. Flagging it, not "fixing" it.
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("flameshot gui"))
 hl.bind(mainMod .. " + P",         hl.dsp.exec_cmd("flameshot full --clipboard"))
  
