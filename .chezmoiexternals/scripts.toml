@@ -1,0 +1,4 @@
+["scripts/"]
+type = "git-repo"
+url = "https://github.com/ctimmsy/scripts"
+
