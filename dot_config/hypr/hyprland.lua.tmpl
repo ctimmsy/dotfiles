@@ -46,17 +46,16 @@ local menu        = "rofi -show drun"
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
     hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("zen-browser", { workspace = "1 silent" })
 
 {{- if $desktop }}
     hl.exec_cmd("/usr/lib/hyprpolkitagent/hyprpolkitagent")
     hl.exec_cmd("bash -c 'pgrep -x hypridle >/dev/null || hypridle'")
-    hl.exec_cmd("zen", { workspace = "1 silent" })
     hl.exec_cmd("obsidian", { workspace = "special:magic silent" })
 {{- end }}
 
 {{- if $laptop }}
     hl.exec_cmd("hypridle")
-    hl.exec_cmd("zen-browser", { workspace = "1 silent" })
     hl.exec_cmd(
         "obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland",
         { workspace = "special:magic silent" }
