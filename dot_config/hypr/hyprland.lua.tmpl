@@ -302,7 +302,7 @@ hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+
 hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                   { locked = true, repeating = true })
 
 -- Change audio device using script
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("audio-switch-next"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("audio-switch"))
  
 -- Screenshot keybinds using flameshot
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("flameshot gui"))
