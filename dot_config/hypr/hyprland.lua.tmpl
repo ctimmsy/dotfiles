@@ -331,6 +331,8 @@ hl.define_submap("sysconf", function()
     hl.bind("SHIFT + J", hl.dsp.exec_cmd("brightnessctl set 5%-"), { repeating = true })
 {{- end }}
 
+    hl.bind("J", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"))
+    hl.bind("K", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"))
     hl.bind("SHIFT + L", hl.dsp.exec_cmd("hyprshade toggle blue-light-filter"))
     hl.bind("Escape", hl.dsp.submap("reset"))
 end) 
