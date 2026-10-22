@@ -1,0 +1,6 @@
+
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
+
+window {
+    border-radius: 10px;
+}
