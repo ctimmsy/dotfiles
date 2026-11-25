@@ -17,14 +17,17 @@ return {
     },
   },
   {
-    {
-      "mfussenegger/nvim-lint",
-      optional = true,
-      opts = {
-        linters_by_ft = {
-          markdown = false,
-        },
-      },
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = function(_, opts)
+      opts.linters_by_ft = opts.linters_by_ft or {}
+      opts.linters_by_ft.markdown = {}
+    end,
+  },
+  {
+    "bullets-vim/bullets.nvim",
+    opts = {
+      enabled_file_types = { "markdown", "text" },
     },
   },
 }

@@ -19,3 +19,12 @@ vim.keymap.set("v", "<leader>sg", function()
     "https://www.google.com/search?q=" .. query,
   }, { detach = true })
 end, { desc = "Search selection in browser" })
+
+-- AI Keymaps
+vim.keymap.set("n", "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "AI Chat" })
+
+vim.keymap.set("n", "<leader>aa", "<cmd>CodeCompanionActions<cr>", { desc = "AI Actions" })
+
+vim.keymap.set("v", "<leader>ae", "<cmd>CodeCompanion<cr>", { desc = "AI Edit Selection" })
+
+vim.keymap.set("n", "<leader>ai", "<cmd>CodeCompanion<cr>", { desc = "AI Inline" })
