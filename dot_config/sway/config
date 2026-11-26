@@ -1,0 +1,178 @@
+# Sway configuration converted from the supplied Hyprland configuration.
+# Place in ~/.config/sway/config
+#
+# Notes:
+# - Sway uses swayfx-only options for blur, rounded corners, and shadows; those
+#   are not included because stock Sway does not support them.
+# - Sway's default layout is not Hyprland's dwindle layout. This uses default
+#   splith, with split-toggle available on Mod+slash.
+# - Review device identifiers with `swaymsg -t get_inputs`.
+
+set $mod Mod4
+set $term ghostty
+set $fileManager dolphin
+set $menu rofi -show drun
+
+# Environment
+set $XCURSOR_SIZE 24
+
+output DP-3 mode 1920x1080@144Hz bg ~/.config/sway/arch-gruv.png stretch
+
+# Autostart
+exec_always --no-startup-id pidof waybar || waybar
+exec --no-startup-id swayidle -w
+exec --no-startup-id sh -c 'swaymsg "workspace number 1"; zen-browser'
+exec --no-startup-id sh -c 'swaymsg "workspace number 2"; ghostty'
+
+# Gaps and borders
+default_border pixel 2
+default_floating_border pixel 2
+gaps inner 0
+gaps outer 0
+
+# Colours: Hyprland active border #db4740; inactive border approximated from rgba(595959aa)
+client.focused          #db4740 #db4740 #ffffff #db4740 #db4740
+client.focused_inactive #595959 #595959 #ffffff #595959 #595959
+client.unfocused        #595959 #303030 #ffffff #595959 #595959
+client.urgent           #cc3333 #cc3333 #ffffff #cc3333 #cc3333
+client.placeholder      #303030 #303030 #ffffff #303030 #303030
+client.background       #1a1a1a
+
+# Input defaults
+input * {
+    xkb_layout us
+    pointer_accel -0.05
+}
+
+# Magic Trackpad (verify exact identifier with `swaymsg -t get_inputs`)
+input "apple-inc.-magic-trackpad" {
+    pointer_accel 0.7
+    accel_profile adaptive
+    scroll_factor 0.5
+    dwt enabled
+    natural_scroll enabled
+}
+
+# Layout / tiling
+workspace_layout default
+# Sway has no exact equivalent of Hyprland's dwindle preserve_split option.
+# Mod+/ toggles the split orientation for the next split.
+bindsym $mod+slash split toggle
+
+# Core bindings
+bindsym $mod+t exec $term
+bindsym $mod+x kill
+bindsym $mod+m exit
+bindsym $mod+f floating toggle
+bindsym $mod+space exec $menu
+
+# Focus
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+
+# Resize (hold key to repeat)
+bindsym $mod+minus resize grow width 50 px
+bindsym $mod+equal resize shrink width 50 px
+bindsym $mod+Shift+equal resize shrink height 50 px
+bindsym $mod+Shift+minus resize grow height 50 px
+
+# Workspace switching: Mod+Q/W/E/R and Mod+number
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+bindsym $mod+q workspace number 1
+bindsym $mod+w workspace number 2
+bindsym $mod+e workspace number 3
+bindsym $mod+r workspace number 4
+bindsym $mod+semicolon workspace back_and_forth
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Move active window to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Move to workspaces 1-4 using Mod+Shift+Q/W/E/R
+bindsym $mod+Shift+q move container to workspace number 1
+bindsym $mod+Shift+w move container to workspace number 2
+bindsym $mod+Shift+e move container to workspace number 3
+bindsym $mod+Shift+r move container to workspace number 4
+
+# Move active container
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Grouping: Sway uses tabbed/stacked layouts rather than Hyprland groups.
+# Mod+G toggles tabbed layout for the current container.
+bindsym $mod+g layout toggle tabbed splith
+bindsym $mod+bracketright focus next
+bindsym $mod+bracketleft focus prev
+bindsym $mod+Ctrl+h move left
+bindsym $mod+Ctrl+j move down
+bindsym $mod+Ctrl+k move up
+bindsym $mod+Ctrl+l move right
+
+# Scratchpad (Sway equivalent of a special workspace)
+bindsym $mod+s scratchpad show
+bindsym $mod+Shift+s move scratchpad
+
+# Mouse drag/resize floating windows
+floating_modifier $mod normal
+
+# Volume and microphone
+bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym --locked XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+# Brightness
+bindsym --locked XF86MonBrightnessUp exec brightnessctl -e4 -n2 set 5%+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl -e4 -n2 set 5%-
+
+# Audio device switch
+bindsym $mod+a exec audio-switch
+
+# Screenshots
+bindsym $mod+Shift+p exec flameshot gui
+bindsym $mod+p exec flameshot full --clipboard
+
+# Media controls
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPrev exec playerctl previous
+
+# System config mode (Sway mode equivalent of Hyprland submap)
+mode "sysconf" {
+    bindsym j exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+    bindsym k exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+    bindsym Shift+l exec hyprshade toggle blue-light-filter
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+c mode "sysconf"
+
+# General Sway settings
+focus_follows_mouse yes
+mouse_warping none

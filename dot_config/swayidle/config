@@ -1,0 +1,6 @@
+timeout 120 'dim-monitor' resume 'restore-monitor-brightness'
+timeout 240 'swaymsg "output * power off"' resume 'swaymsg "output * power on" && sleep 2 && restore-monitor-brightness'
+timeout 300 'swaylock -f'
+timeout 600 'systemctl sleep'
+before-sleep 'swaylock -f'
+after-resume 'swaymsg "output * power on" && sleep 2 && restore-monitor-brightness' 
