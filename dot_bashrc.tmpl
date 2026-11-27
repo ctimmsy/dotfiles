@@ -18,6 +18,10 @@ export CDPATH=".:~:~/repos"
 export LC_COLLATE="C"
 export EDITOR=nvim
 export TZ=Europe/London
+if [[ -n $DEVSY ]]; then
+  export SNACKS_SSH=true
+fi
+
 
 ####################
 ##### ALIASES ######
